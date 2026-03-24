@@ -20,7 +20,7 @@ exports.creditWallet = async (data) => {
     return resp
   }
 
-  const fetchWallet = await Wallet.findOne({ referenceId, userid: userId }).lean()
+  const fetchWallet = await Wallet.findOne({ referenceId, userid: userId })
   if (!fetchWallet) {
     resp.message = "Wallet not found for this user"
     return resp
@@ -66,7 +66,7 @@ exports.debitWallet = async (data) => {
     return resp
   }
 
-  const fetchWallet = await Wallet.findOne({ referenceId, userid: userId }).lean()
+  const fetchWallet = await Wallet.findOne({ referenceId, userid: userId })
   if (!fetchWallet) {
     resp.message = "Wallet not found for this user"
     return resp
@@ -105,7 +105,7 @@ exports.debitWallet = async (data) => {
 exports.allTransactions = async (userId) => {
   const resp = baseResp()
 
-  const fetchWallet = await Wallet.find({ userid: userId }).lean()
+  const fetchWallet = await Wallet.find({ userid: userId })
   if (!fetchWallet || fetchWallet.length === 0) {
     resp.message = "No wallet transactions found"
     return resp
@@ -127,7 +127,7 @@ exports.balance = async (data) => {
     return resp
   }
 
-  const fetchWallet = await Wallet.findOne({ referenceId, userid: userId }).lean()
+  const fetchWallet = await Wallet.findOne({ referenceId, userid: userId })
   if (!fetchWallet) {
     resp.message = "Wallet not found for this user"
     return resp

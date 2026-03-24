@@ -7,7 +7,7 @@ const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1h"
 const SALT_ROUNDS = 10
 
 const sanitizeUser = (userDoc) => {
-  const user = userDoc.toObject ? userDoc.toObject() : { ...userDoc }
+  const user = { ...userDoc }
   delete user.password
   return user
 }
@@ -57,7 +57,7 @@ exports.login = async (data) => {
     throw error
   }
 
-  const user = await User.findOne({ email }).select("+password")
+  const user = await User.findOne({ email })
   if (!user) {
     const error = new Error("Invalid email or password")
     error.status = 401
@@ -83,7 +83,7 @@ exports.login = async (data) => {
   }
 }
 
-exports.getUsers = async (filter = {}) => {
-  const users = await User.find(filter)
+exports.getUsers = async () => {
+  const users = await User.find()
   return users.map(sanitizeUser)
 }
