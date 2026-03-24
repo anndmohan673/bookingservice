@@ -7,13 +7,16 @@ const getDatePart = (date) => {
   return `${day}${month}${year}`
 }
 
-const generateRandomString = ({ prefix, length = 16, includeDate = false }) => {
+const generateRandomString = ({ prefix, length, includeDate = false }) => {
   if (!prefix || typeof prefix !== "string" || !prefix.trim()) {
     throw new Error("prefix is required to generate random string")
   }
 
   const size = Math.max(4, Number(length) || 16)
-  const token = crypto.randomInt(0, 10 ** size).toString().padStart(size, "0")
+  let token = ""
+  for (let i = 0; i < size; i += 1) {
+    token += crypto.randomInt(10)
+  }
   const cleanPrefix = prefix.trim().toUpperCase()
 
   if (!includeDate) {
