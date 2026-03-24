@@ -1,8 +1,8 @@
-const r2services = require("../services/r2services")
+const cloudflareDb = require("../services/cloudflaredb")
 
 exports.generateUploadUrl = async (req, res, next) => {
   try {
-    const result = await r2services.createUploadUrl(req.body)
+    const result = await cloudflareDb.createSignedUploadUrl(req.body)
     return res.status(200).json({
       message: "Upload URL generated",
       ...result
@@ -14,7 +14,7 @@ exports.generateUploadUrl = async (req, res, next) => {
 
 exports.generateDownloadUrl = async (req, res, next) => {
   try {
-    const result = await r2services.createDownloadUrl(req.body)
+    const result = await cloudflareDb.createSignedDownloadUrl(req.body)
     return res.status(200).json({
       message: "Download URL generated",
       ...result

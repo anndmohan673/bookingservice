@@ -1,14 +1,6 @@
-const mongoose = require("mongoose")
-
-const mongoDb = async () => {
-    try {
-        await mongoose.connect(process.env.MONGO_URI)
-        console.log("DB connected")
-    } catch (error) {
-        console.error("DB connection error:", error)
-        console.log("DB not connected")
-        throw error
-    }
+const cloudflareDb = async () => {
+  // R2 object storage is used directly by services/models.
+  return true
 }
 
-module.exports = mongoDb
+module.exports = cloudflareDb
